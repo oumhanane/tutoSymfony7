@@ -17,6 +17,7 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #{}
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -98,10 +99,10 @@ class Category
     /**
      * @return Collection<int, Recipe>
      */
-    public function getRecipes(): Collection
-    {
-        return $this->recipes;
-    }
+    // public function getRecipes(): Collection
+    // {
+    //     return $this->recipes;
+    // }
 
     public function addRecipe(Recipe $recipe): static
     {
