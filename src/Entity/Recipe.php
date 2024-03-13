@@ -10,6 +10,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[UniqueEntity('title')]
@@ -20,20 +23,24 @@ class Recipe
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['recipes.index'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min: 5)]
     #[BanWord()]
+    #[Groups(['recipes.index'])]
     private string $title = '';
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min: 5)]
     #[Assert\Regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', message: "Invalid slug")]
+    #[Groups(['recipes.index'])]
     private string $slug = '';
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(min: 5)]
+    #[Groups(['recipes.show'])]
     private string $content = '';
 
     #[ORM\Column]
